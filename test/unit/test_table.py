@@ -132,3 +132,39 @@ def test_down():
 
   assert Tc.toBottom() == TAnsC
   assert Td.toBottom() == TAnsD
+
+def test_left():
+  a = [ 1, 2, 3, 4,
+        5, 6, 7, 8,
+        9,10,11,12,
+       13,14,15,16]
+  b = [ 1, 2, 3, 4,
+        5, 6, 7, 8,
+       16,10,11,12,
+       13,14,15,9]
+  c = [ 1, 2, 3, 4,
+        5, 6, 7, 8,
+       10,16,11,12,
+       13,14,15,9]
+
+  ansA = [ 1, 2, 3, 4,
+           5, 6, 7, 8,
+           9,10,11,12,
+          13,14,16,15]
+
+  Ta = Table(a)
+  Tb = Table(b)
+  Tc = Table(c)
+  TAnsA = Table(ansA)
+
+  assert Ta.toLeft() == TAnsA
+  assert Tc.toLeft() == Tb
+
+  try:
+    Tb.toLeft()
+  except Exception as e:
+    if e.args[0] != "The empty slot is in the leftmost":
+      raise e
+
+def test_right():
+  pass
