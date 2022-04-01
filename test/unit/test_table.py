@@ -55,3 +55,36 @@ def test_cost():
   assert Tc.prediction() == 2
   assert Td.prediction() == 0
 
+def test_up():
+  a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+  b = [16,2,3,4,5,6,7,8,9,10,11,12,13,14,15,1]
+  c = [1,2,3,4,5,6,7,8,9,16,11,12,13,14,15,10]
+  d = [2,3,16,4,5,6,7,8,9,10,11,12,13,14,15,1]
+
+  Ta = Table(a)
+  Tb = Table(b)
+  Tc = Table(c)
+  Td = Table(d)
+
+  ansA = [1,2,3,4,5,6,7,8,9,10,11,16,13,14,15,12]
+  ansC = [1,2,3,4,5,16,7,8,9,6,11,12,13,14,15,10]
+
+  Taa = Table(ansA)
+  Tac = Table(ansC)
+
+  assert Ta.toTop() == Taa
+  
+  try:
+    Tb.toTop()
+  except Exception as e:
+    if e.args[0] != "The empty slot is in the top":
+      raise e
+
+  try:
+    Td.toTop()
+  except Exception as e:
+    if e.args[0] != "The empty slot is in the top":
+      raise e
+
+
+  assert Tc.toTop() == Tac
