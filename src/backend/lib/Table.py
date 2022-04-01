@@ -4,14 +4,28 @@ class Table:
     cnt = 0
 
     for i in table:
-      for j in i:
-        self.__table.append(j)
-        
-        if j == 16:
-          self.__pos = cnt
-        
-        cnt += 1
+      self.__table.append(i)
+      
+      if i == 16:
+        self.__pos = cnt
+      
+      cnt += 1
   
+  def __eq__(self, __o: object) -> bool:
+    return self.__table == __o.getTable()
+  
+  def __ge__(self, __o:object) -> bool:
+    return self.__table >= __o.getTable()
+
+  def __gt__(self, __o:object) -> bool:
+    return self.__table > __o.getTable()
+
+  def __le__(self, __o:object) -> bool:
+    return self.__table <= __o.getTable()
+
+  def __lt__(self, __o:object) -> bool:
+    return self.__table < __o.getTable()
+
   def getTable(self) -> list:    
     return self.__table
   
@@ -31,7 +45,7 @@ class Table:
   def prediction(self) -> int:
     score = 0
     for i in range(len(self.__table)):
-      if i + 1 != self.__table[i]:
+      if i + 1 != self.__table[i] and self.__table[i] != 16:
         score += 1
     
     return score
@@ -82,3 +96,6 @@ class Table:
 
     cp[bottomIdx], cp[self.__pos] = cp[self.__pos], cp[bottomIdx]
     return Table(cp)
+  
+  def isSolution(self) -> bool:
+    return self.prediction() == 0
