@@ -1,3 +1,6 @@
 {
-  "python.analysis.extraPaths": ["./src/backend"]
+  "python.analysis.extraPaths": ["./src/backend"],
+  "python.testing.pytestArgs": ["."],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }

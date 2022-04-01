@@ -77,6 +77,7 @@ def test_up():
   
   try:
     Tb.toTop()
+    assert False
   except MoveException as e:
     if e.args[0] != "The empty slot is in the top" or e.getMove() != "UP":
       raise e
@@ -85,6 +86,7 @@ def test_up():
 
   try:
     Td.toTop()
+    assert False
   except MoveException as e:
     if e.args[0] != "The empty slot is in the top" or e.getMove() != "UP":
       raise e
@@ -125,6 +127,7 @@ def test_down():
 
   try:
     Ta.toBottom()
+    assert False
   except MoveException as e:
     if e.args[0] != "The empty slot is in the bottom" or e.getMove() != "DOWN":
       raise e
@@ -133,6 +136,7 @@ def test_down():
 
   try:
     Tb.toBottom()
+    assert False
   except MoveException as e:
     if e.args[0] != "The empty slot is in the bottom" or e.getMove() != "DOWN":
       raise e
@@ -171,6 +175,7 @@ def test_left():
 
   try:
     Tb.toLeft()
+    assert False
   except MoveException as e:
     if e.args[0] != "The empty slot is in the leftmost" or e.getMove() != "LEFT":
       raise e
@@ -197,6 +202,7 @@ def test_right():
 
   try:
     Tb.toRight()
+    assert False
   except MoveException as e:
     if e.args[0] != "The empty slot is in the rightmost" or e.getMove() != "RIGHT":
       raise e
