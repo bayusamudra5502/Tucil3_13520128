@@ -5,9 +5,10 @@ class StateSave:
     self.__list = []
   
   def addState(self, table: Table):
+    if self.isStateExist(table): return
     self.__list.append(table)
   
-    for i in range(len(self.__list), 0, -1):
+    for i in range(len(self.__list)-1, 0, -1):
       if self.__list[i] < self.__list[i-1]:
         self.__list[i], self.__list[i-1] = self.__list[i-1], self.__list[i]
       else:
@@ -28,3 +29,6 @@ class StateSave:
         l = mid + 1
 
     return False
+
+  def getLength(self):
+    return len(self.__list)
