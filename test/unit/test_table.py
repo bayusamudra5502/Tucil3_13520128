@@ -88,3 +88,47 @@ def test_up():
 
 
   assert Tc.toTop() == Tac
+
+def test_down():
+  a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+  b = [1,2,3,4,5,6,7,8,9,10,11,12,13,16,15,14]
+  c = [ 1, 2, 3, 4,
+        5, 6, 7, 8,
+        9,10,16,12,
+       13,14,15,11]
+  d = [ 1,16, 3, 4,
+        5, 6, 7, 8,
+        9,10,11,12,
+       13,14,15,2]
+
+  Ta = Table(a)
+  Tb = Table(b)
+  Tc = Table(c)
+  Td = Table(d)
+
+  ansC = [ 1, 2, 3, 4,
+        5, 6, 7, 8,
+        9,10,15,12,
+       13,14,16,11]
+  ansD = [ 1,6, 3, 4,
+           5, 16, 7, 8,
+           9,10,11,12,
+          13,14,15,2]
+  
+  TAnsC = Table(ansC)
+  TAnsD = Table(ansD)
+
+  try:
+    Ta.toBottom()
+  except Exception as e:
+    if e.args[0] != "The empty slot is in the bottom":
+      raise e
+
+  try:
+    Tb.toBottom()
+  except Exception as e:
+    if e.args[0] != "The empty slot is in the bottom":
+      raise e
+
+  assert Tc.toBottom() == TAnsC
+  assert Td.toBottom() == TAnsD
