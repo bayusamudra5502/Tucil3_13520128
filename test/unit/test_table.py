@@ -1,4 +1,5 @@
 from lib.Table import Table
+from lib.MoveException import MoveException
 
 def test_comparison():
   a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
@@ -76,15 +77,19 @@ def test_up():
   
   try:
     Tb.toTop()
-  except Exception as e:
-    if e.args[0] != "The empty slot is in the top":
+  except MoveException as e:
+    if e.args[0] != "The empty slot is in the top" or e.getMove() != "UP":
       raise e
+  except Exception as e:
+    raise e
 
   try:
     Td.toTop()
-  except Exception as e:
-    if e.args[0] != "The empty slot is in the top":
+  except MoveException as e:
+    if e.args[0] != "The empty slot is in the top" or e.getMove() != "UP":
       raise e
+  except Exception as e:
+    raise e
 
 
   assert Tc.toTop() == Tac
@@ -120,15 +125,19 @@ def test_down():
 
   try:
     Ta.toBottom()
-  except Exception as e:
-    if e.args[0] != "The empty slot is in the bottom":
+  except MoveException as e:
+    if e.args[0] != "The empty slot is in the bottom" or e.getMove() != "DOWN":
       raise e
+  except Exception as e:
+    raise e
 
   try:
     Tb.toBottom()
-  except Exception as e:
-    if e.args[0] != "The empty slot is in the bottom":
+  except MoveException as e:
+    if e.args[0] != "The empty slot is in the bottom" or e.getMove() != "DOWN":
       raise e
+  except Exception as e:
+    raise e
 
   assert Tc.toBottom() == TAnsC
   assert Td.toBottom() == TAnsD
@@ -162,9 +171,37 @@ def test_left():
 
   try:
     Tb.toLeft()
-  except Exception as e:
-    if e.args[0] != "The empty slot is in the leftmost":
+  except MoveException as e:
+    if e.args[0] != "The empty slot is in the leftmost" or e.getMove() != "LEFT":
       raise e
+  except Exception as e:
+    raise e
 
 def test_right():
-  pass
+  b = [ 1, 2, 3, 4,
+        5, 7, 8,16,
+        9,10,11,12,
+       13,14,15, 6]
+  c = [ 1, 2, 3, 4,
+        5, 7,16, 8,
+        9,10,11,12,
+       13,14,15, 6]
+  d = [ 1, 2, 3, 4,
+        5,16, 7, 8,
+        9,10,11,12,
+       13,14,15, 6]
+  
+  Tb = Table(b)
+  Tc = Table(c)
+  Td = Table(d)
+
+  try:
+    Tb.toRight()
+  except MoveException as e:
+    if e.args[0] != "The empty slot is in the rightmost" or e.getMove() != "RIGHT":
+      raise e
+  except Exception as e:
+    raise e
+  
+  assert Td.toRight() == Tc
+  assert Tc.toRight() == Tb

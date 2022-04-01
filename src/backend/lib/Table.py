@@ -1,3 +1,5 @@
+from lib.MoveException import MoveException
+
 class Table:
   def __init__(self, table: list) -> None:
     self.__table = []
@@ -54,7 +56,7 @@ class Table:
     j = self.__pos % 4
 
     if j == 0:
-      raise Exception("The empty slot is in the leftmost")
+      raise MoveException("The empty slot is in the leftmost", "LEFT")
 
     cp = self.__table.copy()
     cp[self.__pos-1], cp[self.__pos] = cp[self.__pos], cp[self.__pos-1]
@@ -65,7 +67,7 @@ class Table:
     j = self.__pos % 4
 
     if j == 3:
-      raise Exception("The empty slot is in the rightmost")
+      raise MoveException("The empty slot is in the rightmost", "RIGHT")
 
     cp = self.__table.copy()
     cp[self.__pos+1], cp[self.__pos] = cp[self.__pos], cp[self.__pos+1]
@@ -76,7 +78,7 @@ class Table:
     i = self.__pos // 4
 
     if i == 0:
-      raise Exception("The empty slot is in the top")
+      raise MoveException("The empty slot is in the top", "UP")
     
     cp = self.__table.copy()
     topIdx = self.__pos - 4
@@ -89,7 +91,7 @@ class Table:
     i = self.__pos // 4
 
     if i >= 3:
-      raise Exception("The empty slot is in the bottom")
+      raise MoveException("The empty slot is in the bottom", "DOWN")
 
     cp = self.__table.copy()
     bottomIdx = self.__pos + 4
