@@ -21,3 +21,6 @@ class PrioQueue:
     res = self.__queue[0]
     self.__queue = self.__queue[1:]
     return res
+
+  def isEmpty(self):
+    return len(self.__queue) == 0
