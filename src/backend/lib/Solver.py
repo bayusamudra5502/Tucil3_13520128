@@ -7,7 +7,7 @@ from lib.MoveException import MoveException
 from lib.UnsolveableException import UnsolveableException
 
 class Solver:
-  def __init__(self, start: Table) -> None:
+  def __init__(self, start: Table, all=False) -> None:
     self.__start = Node(start)
     self.__prio = PrioQueue()
     self.__state = StateSave()
@@ -16,6 +16,8 @@ class Solver:
     )
     self.__solution: list[Node] = []
     self.__costLimit = -1
+    self.__nodeNumber = 1
+    self.__allSolution = all
 
   def solve(self):
     if not self.__start.getTable().isSolveable():
@@ -30,6 +32,9 @@ class Solver:
           
         self.__solution.append(currentState)
         self.__costLimit = currentState.cost()
+
+        if not self.__allSolution:
+          return
         self.__prio = self.__prio.filterQueue(self.__costLimit)
         continue
       elif self.__costLimit != -1 and \
@@ -44,8 +49,8 @@ class Solver:
           newNode = currentState.move(i)
           if self.__state.isStateExist(newNode.getTable()):
             continue
-          self.__state.addState(newNode.getTable())
           self.__prio.push(newNode)
+          self.__nodeNumber += 1
         except MoveException as e:
           pass
         except Exception as e:
@@ -56,3 +61,6 @@ class Solver:
 
   def getMinimalCost(self):
     return self.__costLimit
+
+  def getNodeNumber(self):
+    return self.__nodeNumber
