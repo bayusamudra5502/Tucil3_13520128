@@ -19,8 +19,20 @@ def test_push_pop():
 
   pq.push(parent.moveUp())
   pq.push(parent.moveDown())
+
+  kedalem = Node(Table(
+      [ 1, 2, 3, 4,
+        5, 6, 7, 8,
+        9,10,11,12,
+       13,14,15,16]),  ["UP","DOWN","UP"])
+
   pq.push(parent.moveLeft())
   pq.push(parent.moveRight())
+  pq.push(kedalem)
+
+  keluar = pq.pop()
+  assert kedalem == keluar
+  assert ["UP","DOWN","UP"] == keluar.getMove()
 
   keluar = pq.pop()
   assert parent.moveDown() == keluar

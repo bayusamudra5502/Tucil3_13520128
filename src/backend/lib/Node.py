@@ -11,19 +11,19 @@ class Node:
 
   def __ge__(self, __o:object) -> bool:
     return self.cost() >= __o.cost() or \
-      (self.cost() == __o.cost() and self.getLevel() >= __o.getLevel())
+      (self.cost() == __o.cost() and self.getLevel() <= __o.getLevel())
 
   def __gt__(self, __o:object) -> bool:
     return self.cost() > __o.cost() or \
-      (self.cost() == __o.cost() and self.getLevel() > __o.getLevel())
+      (self.cost() == __o.cost() and self.getLevel() < __o.getLevel())
 
   def __le__(self, __o:object) -> bool:
     return self.cost() <= __o.cost() or \
-      (self.cost() == __o.cost() and self.getLevel() <= __o.getLevel())
+      (self.cost() == __o.cost() and self.getLevel() >= __o.getLevel())
 
   def __lt__(self, __o:object) -> bool:
     return self.cost() < __o.cost() or \
-      (self.cost() == __o.cost() and self.getLevel() < __o.getLevel())
+      (self.cost() == __o.cost() and self.getLevel() > __o.getLevel())
 
   def getTable(self) -> list:
     return self.__table.getTable()

@@ -11,6 +11,19 @@ def test_cost():
   assert Node(Ta, ["UP"]).cost() == 5
   assert Node(Tb, ["DOWN","UP"]).cost() == 6
 
+  c = Node(Table(
+      [ 1, 2, 3, 4,
+        5, 6, 7, 8,
+        9,10,11,12,
+       13,14,15,16]),  ["UP","DOWN","UP"])
+  
+  d = Node(Table([1,2,3,4,5,6,16,8,9,10,7,11,13,14,15,12])).moveDown()
+
+  assert c.cost() == d.cost()
+  assert c < d
+  assert not c == d
+
+
 def test_move():
   pos = [  1, 2, 3, 4,
            5, 6,16, 8,
