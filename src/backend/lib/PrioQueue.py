@@ -22,5 +22,14 @@ class PrioQueue:
     self.__queue = self.__queue[1:]
     return res
 
+  def filterQueue(self, cost):
+    result = PrioQueue()
+
+    for i in self.__queue:
+      if i.cost() <= cost:
+        result.push(i)
+    
+    return result
+
   def isEmpty(self):
     return len(self.__queue) == 0

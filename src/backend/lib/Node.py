@@ -25,8 +25,8 @@ class Node:
     return self.cost() < __o.cost() or \
       (self.cost() == __o.cost() and self.getLevel() > __o.getLevel())
 
-  def getTable(self) -> list:
-    return self.__table.getTable()
+  def getTable(self) -> Table:
+    return self.__table
 
   def getLevel(self) -> int:
     return self.__level
@@ -51,3 +51,15 @@ class Node:
 
   def moveRight(self):
     return Node(self.__table.toRight(), [*self.__move, "RIGHT"])
+
+  def move(self, move: str):
+    if move == "UP":
+      return self.moveUp()
+    elif move == "DOWN":
+      return self.moveDown()
+    elif move == "LEFT":
+      return self.moveLeft()
+    elif move == "RIGHT":
+      return self.moveRight()
+    else:
+      raise Exception("Move action unknown")
