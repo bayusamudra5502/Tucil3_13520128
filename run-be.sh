@@ -1,3 +1,3 @@
 #!/bin/bash
 source ./venv/bin/activate
-python src/main.py $1
+python src/be.py 8080
