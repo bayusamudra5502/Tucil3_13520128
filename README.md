@@ -1,4 +1,4 @@
-# Stima 15-Puzzle Problem
+# 15-Puzzle Problem
 
 ### Tugas Kecil 3 IF2211 Strategi Algoritma
 
