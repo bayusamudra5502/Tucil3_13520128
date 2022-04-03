@@ -31,8 +31,8 @@ class Table:
   def getTable(self) -> list:    
     return self.__table
   
-  def solvePoint(self) -> int:
-    kurang = (self.__pos + ((self.__pos // 4) % 2)) % 2
+  def fungsiKurang(self) -> int:
+    kurang = 0
 
     for i in range(len(self.__table)):
       for j in range(i+1, len(self.__table)):
@@ -40,6 +40,11 @@ class Table:
           kurang += 1
     
     return kurang
+
+  def solvePoint(self) -> int:
+    kurang = (self.__pos + ((self.__pos // 4) % 2)) % 2
+
+    return kurang + self.fungsiKurang()
 
   def isSolveable(self) -> bool:
     return (self.solvePoint() % 2) == 0

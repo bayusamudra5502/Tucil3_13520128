@@ -20,19 +20,16 @@ def main(filePath):
       input.append(int(i))
 
   print()
-  try:
-    table = Table(input)
-    solver = Solver(table)
 
+  table = Table(input)
+  solver = Solver(table)
+  start = datetime.now()
+  try:
     print("\x1B[35mMatriks Input:\x1B[0m")
     printTable(table)
     print()
 
-    start = datetime.now()
     solver.solve()
-    end = datetime.now()
-    time = end - start
-
 
     print("\x1B[35mLangkah Penyelesaian:\x1B[0m\n")
     penjelajah = Node(table)
@@ -44,13 +41,26 @@ def main(filePath):
       print()
       cnt += 1
     
+    end = datetime.now()
+    time = end - start
     printTime(time)
     print("Jumlah Langkah : \x1B[33m%d\x1B[0m langkah" % solver.getMinimalCost())
     print("Jumlah Node: \x1B[33m%d\x1B[0m node" % solver.getNodeNumber())
-
+    print()
+    
   except UnsolveableException:
     print("Hasil Proses:")
-    print("Solusi tidak ditemukan")
+    print("\x1B[31mSolusi tidak ditemukan\x1B[0m")
+    print()
+
+    end = datetime.now()
+    time = end - start
+    printTime(time)
+  finally:
+    print("\x1B[35mData Instans:\x1B[0m")
+    print("Jumlah Kurang(i) = \x1B[33m%d\x1B[0m" % table.fungsiKurang())
+    print("Jumlah Kurang(i) + paritas = \x1B[33m%d\x1B[0m" % table.solvePoint())
+  
 
 def printTable(table: Table):
   num = 0
